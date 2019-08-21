@@ -1,6 +1,6 @@
 # Ближайшие бары
 
-[FIXME. Здесь будет описание проекта]
+Скрипт для поиска самого большого, самого маленького и самого ближайшего к вам бара.
 
 # Как запустить
 
@@ -10,8 +10,7 @@
 
 ```bash
 
-$ python bars.py # possibly requires call of python3 executive instead of just python
-# FIXME вывести пример ответа скрипта
+$ python bars.py
 
 ```
 
