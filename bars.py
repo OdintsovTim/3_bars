@@ -33,7 +33,7 @@ def get_closest_bar(bars_info, longitude, latitude):
         key=lambda bar: distance.distance(
             my_coords,
             bar['geometry']['coordinates']
-            ).km)
+        ).km)
     closet_bar_name = closet_bar_info['properties']['Attributes']['Name']
     return closet_bar_name
 
