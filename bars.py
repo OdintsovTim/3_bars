@@ -9,35 +9,26 @@ def load_data(filepath):
 
 
 def get_biggest_bar(bars_info):
-    biggest_bar = ''
-    biggest_seats_count = 1
-    for bar in bars_info['features']:
-        if bar['properties']['Attributes']['SeatsCount'] > biggest_seats_count:
-            biggest_seats_count = bar['properties']['Attributes']['SeatsCount']
-            biggest_bar = bar['properties']['Attributes']['Name']
-    return biggest_bar
+    biggest_bar_info = max(bars_info['features'], 
+                    key=lambda bars: bars['properties']['Attributes']['SeatsCount'])
+    biggest_bar_name = biggest_bar_info['properties']['Attributes']['Name']
+    return biggest_bar_name
 
 
 def get_smallest_bar(bars_info):
-    smallest_bar = ''
-    smallest_seats_count = 100000
-    for bar in bars_info['features']:
-        if bar['properties']['Attributes']['SeatsCount'] < smallest_seats_count:
-            smallest_seats_count = bar['properties']['Attributes']['SeatsCount']
-            smallest_bar = bar['properties']['Attributes']['Name']
-    return smallest_bar
+    smallest_bar_info = min(bars_info['features'], 
+                    key=lambda bar: bar['properties']['Attributes']['SeatsCount'])
+    smallest_bar_name = smallest_bar_info['properties']['Attributes']['Name']
+    return smallest_bar_name
 
 
 def get_closest_bar(bars_info, longitude, latitude):
     my_coords = (longitude, latitude)
-    min_spacing = 1000000000
-    closet_bar = ''
-    for bar in bars_info['features']:
-        spacing = distance.distance(my_coords, bar['geometry']['coordinates']).km
-        if spacing < min_spacing:
-            min_spacing = spacing
-            closet_bar = bar['properties']['Attributes']['Name']
-    return closet_bar
+    closet_bar_info = min(bars_info['features'],
+                        key=lambda bar: distance.distance(my_coords, 
+                                                    bar['geometry']['coordinates']).km)
+    closet_bar_name = closet_bar_info['properties']['Attributes']['Name']
+    return closet_bar_name
         
 
 
