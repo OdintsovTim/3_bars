@@ -8,31 +8,31 @@ def load_data(filepath):
         return json.load(f)
 
 
-def get_biggest_bar(data):
+def get_biggest_bar(bars_info):
     biggest_bar = ''
     biggest_seats_count = 1
-    for bar in data['features']:
+    for bar in bars_info['features']:
         if bar['properties']['Attributes']['SeatsCount'] > biggest_seats_count:
             biggest_seats_count = bar['properties']['Attributes']['SeatsCount']
             biggest_bar = bar['properties']['Attributes']['Name']
     return biggest_bar
 
 
-def get_smallest_bar(data):
+def get_smallest_bar(bars_info):
     smallest_bar = ''
     smallest_seats_count = 100000
-    for bar in data['features']:
+    for bar in bars_info['features']:
         if bar['properties']['Attributes']['SeatsCount'] < smallest_seats_count:
             smallest_seats_count = bar['properties']['Attributes']['SeatsCount']
             smallest_bar = bar['properties']['Attributes']['Name']
     return smallest_bar
 
 
-def get_closest_bar(data, longitude, latitude):
+def get_closest_bar(bars_info, longitude, latitude):
     my_coords = (longitude, latitude)
     min_spacing = 1000000000
     closet_bar = ''
-    for bar in data['features']:
+    for bar in bars_info['features']:
         spacing = distance.distance(my_coords, bar['geometry']['coordinates']).km
         if spacing < min_spacing:
             min_spacing = spacing
