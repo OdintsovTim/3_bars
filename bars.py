@@ -9,27 +9,33 @@ def load_data(filepath):
 
 
 def get_biggest_bar(bars_info):
-    biggest_bar_info = max(bars_info['features'], 
-                    key=lambda bars: bars['properties']['Attributes']['SeatsCount'])
+    biggest_bar_info = max(
+        bars_info['features'],
+        key=lambda bars: bars['properties']['Attributes']['SeatsCount']
+        )
     biggest_bar_name = biggest_bar_info['properties']['Attributes']['Name']
     return biggest_bar_name
 
 
 def get_smallest_bar(bars_info):
-    smallest_bar_info = min(bars_info['features'], 
-                    key=lambda bar: bar['properties']['Attributes']['SeatsCount'])
+    smallest_bar_info = min(
+        bars_info['features'],
+        key=lambda bar: bar['properties']['Attributes']['SeatsCount']
+        )
     smallest_bar_name = smallest_bar_info['properties']['Attributes']['Name']
     return smallest_bar_name
 
 
 def get_closest_bar(bars_info, longitude, latitude):
     my_coords = (longitude, latitude)
-    closet_bar_info = min(bars_info['features'],
-                        key=lambda bar: distance.distance(my_coords, 
-                                                    bar['geometry']['coordinates']).km)
+    closet_bar_info = min(
+        bars_info['features'],
+        key=lambda bar: distance.distance(
+            my_coords,
+            bar['geometry']['coordinates']
+            ).km)
     closet_bar_name = closet_bar_info['properties']['Attributes']['Name']
     return closet_bar_name
-        
 
 
 def main():
