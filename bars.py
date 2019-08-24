@@ -5,19 +5,19 @@ from geopy import distance
 
 def load_data(filepath):
     with open(filepath, 'r') as file1:
-        return json.load(file1)
+        return json.load(file1)['features']
 
 
 def get_biggest_bar(bars_info):
     biggest_bar_info = max(
-        bars_info['features'],
+        bars_info,
         key=lambda bars: bars['properties']['Attributes']['SeatsCount'])
     return biggest_bar_info
 
 
 def get_smallest_bar(bars_info):
     smallest_bar_info = min(
-        bars_info['features'],
+        bars_info,
         key=lambda bar: bar['properties']['Attributes']['SeatsCount'])
     return smallest_bar_info
 
@@ -25,7 +25,7 @@ def get_smallest_bar(bars_info):
 def get_closest_bar(bars_info, longitude, latitude):
     my_coords = (longitude, latitude)
     closet_bar_info = min(
-        bars_info['features'],
+        bars_info,
         key=lambda bar: distance.distance(
             my_coords,
             bar['geometry']['coordinates']).km)
