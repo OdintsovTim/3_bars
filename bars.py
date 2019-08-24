@@ -33,36 +33,26 @@ def get_closest_bar(bars_info, longitude, latitude):
 
 
 def main():
-    while True:
-        try:
-            filepath = input('Введите путь до файла: ')
-            bars_info = load_data(filepath)
-            break
-        except FileNotFoundError:
-            print('Такой файл не найден')
-        except json.decoder.JSONDecodeError:
-            print('Это файл не формата json')
-    while True:
-        try:
-            longitude = float(input('Введите вашу долготу: '))
-            break
-        except ValueError:
-            print('Введите числовое значение')
-    while True:
-        try:
-            latitude = float(input('Введите вашу широту: '))
-            break
-        except ValueError:
-            print('Введите числовое значение')
-    biggest_bar = get_biggest_bar(bars_info)
-    biggest_bar_name = biggest_bar['properties']['Attributes']['Name']
-    smallest_bar = get_smallest_bar(bars_info)
-    smallest_bar_name = smallest_bar['properties']['Attributes']['Name']
-    closet_bar = get_closest_bar(bars_info, longitude, latitude)
-    closet_bar_name = closet_bar['properties']['Attributes']['Name']
-    print('Самый большой бар:', biggest_bar_name)
-    print('Самый маленький бар:', smallest_bar_name)
-    print('Самый близкий бар:', closet_bar_name)
+    try:
+        filepath = input('Введите путь до файла: ')
+        bars_info = load_data(filepath)
+        longitude = float(input('Введите вашу долготу: '))
+        latitude = float(input('Введите вашу широту: '))
+        biggest_bar = get_biggest_bar(bars_info)
+        biggest_bar_name = biggest_bar['properties']['Attributes']['Name']
+        smallest_bar = get_smallest_bar(bars_info)
+        smallest_bar_name = smallest_bar['properties']['Attributes']['Name']
+        closet_bar = get_closest_bar(bars_info, longitude, latitude)
+        closet_bar_name = closet_bar['properties']['Attributes']['Name']
+        print('Самый большой бар:', biggest_bar_name)
+        print('Самый маленький бар:', smallest_bar_name)
+        print('Самый близкий бар:', closet_bar_name)
+    except FileNotFoundError:
+        print('Такой файл не найден')
+    except json.decoder.JSONDecodeError:
+        print('Это файл не формата json')
+    except ValueError:
+        print('Введите числовое значение')
 
 
 if __name__ == '__main__':
