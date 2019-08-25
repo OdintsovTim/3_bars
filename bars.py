@@ -1,17 +1,18 @@
+import argparse
 import json
 
 from geopy import distance
 
 
 def load_data(filepath):
-    with open(filepath, 'r') as file1:
-        return json.load(file1)['features']
+    with open(filepath, 'r') as json_file:
+        return json.load(json_file)['features']
 
 
 def get_biggest_bar(bars_info):
     biggest_bar_info = max(
         bars_info,
-        key=lambda bars: bars['properties']['Attributes']['SeatsCount'])
+        key=lambda bar: bar['properties']['Attributes']['SeatsCount'])
     return biggest_bar_info
 
 
@@ -32,9 +33,16 @@ def get_closest_bar(bars_info, longitude, latitude):
     return closet_bar_info
 
 
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filepath')
+    args = parser.parse_args()
+    return args
+
+
 def main():
     try:
-        filepath = input('Введите путь до файла: ')
+        filepath = create_parser().filepath
         bars_info = load_data(filepath)
         longitude = float(input('Введите вашу долготу: '))
         latitude = float(input('Введите вашу широту: '))
